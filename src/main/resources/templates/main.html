@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:insert="links.html"></div>
+</head>
+<body>
+<div th:insert="navbar.html"></div>
+<div class="container mt-2">
+    <table class="table table-striped text-secondary">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>GENRE</th>
+                <th>DURATION</th>
+                <th>DETAILS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="f: ${filmy}">
+                <td th:text="${f.id}"></td>
+                <td th:text="${f.name}"></td>
+                <td th:text="${f.genre}"></td>
+                <td th:text="${f.duration}"></td>
+                <td style="width: 8%;"><a class="btn btn-secondary btn-sm">DETAILS</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
