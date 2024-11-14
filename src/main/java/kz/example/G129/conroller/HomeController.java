@@ -4,9 +4,7 @@ import kz.example.G129.db.DBManager;
 import kz.example.G129.model.Film;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -36,8 +34,28 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping(value = "/film-details/{id}")
+    public String detailsFilm(@PathVariable int id,
+                              Model model){
+        model.addAttribute("film", DBManager.getFilmById(id));
+        return "film-details";
+    }
+
     @GetMapping(value = "/add-film")
     public String addFilm() {
         return "add-film";
+    }
+
+    @PostMapping(value = "/update-film")
+    public String updateFilm(Film film){
+        DBManager.updateFilm(film);
+        return "redirect:/";
+    }
+
+    @PostMapping(value = "/delete-film/{id}")
+    public String deleteFilm(@PathVariable int id){
+        DBManager.deleteFilm(id);
+
+        return "redirect:/";
     }
 }

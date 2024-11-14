@@ -28,4 +28,21 @@ public class DBManager {
         films.add(film);
     }
 
+    public static Film getFilmById(int id) {
+        return films.stream().filter(s-> s.getId()==id).findFirst().orElseThrow();
+    }
+
+    public static void updateFilm(Film film) {
+        for(Film f: films){
+            if(f.getId()==film.getId()){
+                f.setGenre(film.getGenre());
+                f.setDuration(film.getDuration());
+                f.setName(film.getName());
+            }
+        }
+    }
+
+    public static void deleteFilm(int id) {
+        films.removeIf(s->s.getId()==id);
+    }
 }

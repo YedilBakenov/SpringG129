@@ -24,7 +24,7 @@
                 <td th:text="${f.name}"></td>
                 <td th:text="${f.genre}"></td>
                 <td th:text="${f.duration}"></td>
-                <td style="width: 8%;"><a class="btn btn-secondary btn-sm">DETAILS</a></td>
+                <td style="width: 8%;"><a class="btn btn-secondary btn-sm" th:href="@{'/film-details/'+ ${f.id}}">DETAILS</a></td>
             </tr>
         </tbody>
     </table>
