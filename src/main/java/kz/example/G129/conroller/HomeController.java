@@ -1,43 +1,38 @@
 package kz.example.G129.conroller;
 
-import kz.example.G129.db.DBManager;
 import kz.example.G129.model.Film;
+import kz.example.G129.repository.ItemRepository;
+import kz.example.G129.service.FilmService;
+import kz.example.G129.service.impl.FilmServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
+    private final  FilmService filmService;
+    private final ItemRepository itemRepository;
     @GetMapping(value = "/") //@WebServlet(value="/")
     public String homePage(Model model) {
-        model.addAttribute("filmy", DBManager.getFilms()); // request.setAttribute("films",  DBManager.getFilms());
+        model.addAttribute("filmy", filmService.getAllFilms()); // request.setAttribute("films",  DBManager.getFilms());
         return "main"; // request.getRequestDispatcher("/main.jsp").forward(request,response);
     }
 
     @PostMapping(value = "/add-film")
     public String addFilm(Film film) {
-        DBManager.addFilm(film);
-        return "redirect:/";
-    }
-
-    @PostMapping(value = "/add-film-v2")
-    public String addFilmV2(@RequestParam String name, // String name = request.getParameter("name");
-                            @RequestParam String genre,
-                            @RequestParam double duration) {
-        Film film = new Film();
-        film.setName(name);
-        film.setDuration(duration);
-        film.setGenre(genre);
-        DBManager.addFilm(film);
+        filmService.addFilm(film);
         return "redirect:/";
     }
 
     @GetMapping(value = "/film-details/{id}")
     public String detailsFilm(@PathVariable int id,
                               Model model){
-        model.addAttribute("film", DBManager.getFilmById(id));
+        model.addAttribute("film",filmService.findById(id));
         return "film-details";
     }
 
@@ -48,13 +43,13 @@ public class HomeController {
 
     @PostMapping(value = "/update-film")
     public String updateFilm(Film film){
-        DBManager.updateFilm(film);
+       filmService.updateFilm(film);
         return "redirect:/";
     }
 
     @PostMapping(value = "/delete-film/{id}")
     public String deleteFilm(@PathVariable int id){
-        DBManager.deleteFilm(id);
+       filmService.deleteFilmById(id);
 
         return "redirect:/";
     }
