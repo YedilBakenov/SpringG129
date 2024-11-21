@@ -34,4 +34,8 @@ public class FilmServiceImpl implements FilmService {
     public void updateFilm(Film film) {
         itemRepository.save(film);
     }
+
+    public List<Film> getFilmsByWord(String word) {
+        return itemRepository.getFilmsByWord(word);
+    }
 }

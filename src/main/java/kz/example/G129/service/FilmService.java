@@ -17,5 +17,6 @@ public interface FilmService {
 
     void updateFilm(Film film);
 
+    List<Film>getFilmsByWord(String word);
 
 }

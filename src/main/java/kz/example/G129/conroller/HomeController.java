@@ -3,9 +3,7 @@ package kz.example.G129.conroller;
 import kz.example.G129.model.Film;
 import kz.example.G129.repository.ItemRepository;
 import kz.example.G129.service.FilmService;
-import kz.example.G129.service.impl.FilmServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +50,12 @@ public class HomeController {
        filmService.deleteFilmById(id);
 
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/search")
+    public String searchByWord(@RequestParam String word,
+                               Model model){
+        model.addAttribute("filmy", filmService.getFilmsByWord(word));
+        return "main";
     }
 }
