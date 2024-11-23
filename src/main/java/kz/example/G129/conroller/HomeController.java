@@ -1,7 +1,8 @@
 package kz.example.G129.conroller;
 
 import kz.example.G129.model.Film;
-import kz.example.G129.repository.ItemRepository;
+import kz.example.G129.repository.FilmRepository;
+import kz.example.G129.service.DirectorService;
 import kz.example.G129.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class HomeController {
 
     private final  FilmService filmService;
-    private final ItemRepository itemRepository;
+    private final FilmRepository filmRepository;
+    private final DirectorService directorService;
     @GetMapping(value = "/") //@WebServlet(value="/")
     public String homePage(Model model) {
         model.addAttribute("filmy", filmService.getAllFilms()); // request.setAttribute("films",  DBManager.getFilms());
@@ -31,11 +33,13 @@ public class HomeController {
     public String detailsFilm(@PathVariable int id,
                               Model model){
         model.addAttribute("film",filmService.findById(id));
+        model.addAttribute("directors",directorService.getAllDirectors());
         return "film-details";
     }
 
     @GetMapping(value = "/add-film")
-    public String addFilm() {
+    public String addFilm(Model model) {
+        model.addAttribute("directors", directorService.getAllDirectors());
         return "add-film";
     }
 

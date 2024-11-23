@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface ItemRepository extends JpaRepository<Film, Integer>{
+public interface FilmRepository extends JpaRepository<Film, Integer>{
 
     @Query("SELECT f FROM Film f " +
             "WHERE f.name ILIKE concat('%', :s, '%')" +

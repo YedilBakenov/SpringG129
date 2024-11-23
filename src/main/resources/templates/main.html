@@ -11,6 +11,7 @@
             <th>NAME</th>
             <th>GENRE</th>
             <th>DURATION</th>
+            <th>DIRECTOR</th>
             <th>DETAILS</th>
         </tr>
         </thead>
@@ -20,6 +21,7 @@
             <td th:text="${f.name}"></td>
             <td th:text="${f.genre}"></td>
             <td th:text="${f.duration}"></td>
+            <td th:text="${f.director.name + ' '+f.director.surname}"></td>
             <td style="width: 8%;"><a class="btn btn-secondary btn-sm"
                                       th:href="@{'/film-details/'+ ${f.id}}">DETAILS</a></td>
         </tr>

@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "films")
-public class Film {
+@Table(name = "directors")
+public class Director {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,14 +19,9 @@ public class Film {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "GENRE")
-    private String genre;
+    @Column(name = "SURNAME")
+    private String surname;
 
-    @Column(name = "DURATION")
-    private double duration;
-
-    @ManyToOne
-    @JoinColumn(name = "DIRECTOR_ID")
-    private Director director;
-
+    @Column(name = "RATING")
+    private double rating;
 }
