@@ -2,6 +2,7 @@ package kz.example.G129.conroller;
 
 import kz.example.G129.model.Film;
 import kz.example.G129.repository.FilmRepository;
+import kz.example.G129.service.ActorService;
 import kz.example.G129.service.DirectorService;
 import kz.example.G129.service.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class HomeController {
 
     private final  FilmService filmService;
-    private final FilmRepository filmRepository;
     private final DirectorService directorService;
+    private final ActorService actorService;
     @GetMapping(value = "/") //@WebServlet(value="/")
     public String homePage(Model model) {
         model.addAttribute("filmy", filmService.getAllFilms()); // request.setAttribute("films",  DBManager.getFilms());
@@ -32,8 +33,12 @@ public class HomeController {
     @GetMapping(value = "/film-details/{id}")
     public String detailsFilm(@PathVariable int id,
                               Model model){
-        model.addAttribute("film",filmService.findById(id));
+        var film = filmService.findById(id);
+        model.addAttribute("film", film);
         model.addAttribute("directors",directorService.getAllDirectors());
+        var actors = actorService.getAllActors();
+        actors.removeAll(film.getActors());
+        model.addAttribute("actors", actors);
         return "film-details";
     }
 
@@ -61,5 +66,34 @@ public class HomeController {
                                Model model){
         model.addAttribute("filmy", filmService.getFilmsByWord(word));
         return "main";
+    }
+
+    @PostMapping(value = "/delete-actor")
+    public String deleteActor(@RequestParam int film_id,
+                              @RequestParam int acter_id){
+        var film = filmService.findById(film_id);
+        var acter = actorService.getActorById(acter_id);
+
+        film.getActors().remove(acter);
+
+        filmService.updateFilm(film);
+
+        return "redirect:film-details/" + film_id;
+
+    }
+
+    @PostMapping(value = "/add-actor")
+    public String addActor(@RequestParam int film_id,
+                           @RequestParam int acter_id){
+        var film = filmService.findById(film_id);
+        var acter = actorService.getActorById(acter_id);
+
+
+        film.getActors().add(acter);
+
+        filmService.updateFilm(film);
+
+        return "redirect:film-details/" + film_id;
+
     }
 }

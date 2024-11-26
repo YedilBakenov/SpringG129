@@ -5,26 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
-@Table(name = "directors")
-public class Director {
+@Table(name = "actors")
+public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "SURNAME")
-    private String surname;
+    @Column(name = "FULL_NAME")
+    private String fullName;
 
     @Column(name = "RATING")
     private double rating;
+
+    @Column(name = "PRICE")
+    private double price;
+
 }

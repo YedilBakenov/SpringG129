@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -27,5 +30,8 @@ public class Film {
     @ManyToOne
     @JoinColumn(name = "DIRECTOR_ID")
     private Director director;
+
+    @ManyToMany
+    private List<Actor> actors;
 
 }
