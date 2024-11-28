@@ -1,7 +1,9 @@
 package kz.example.G129.conroller;
 
 import kz.example.G129.model.Film;
+import kz.example.G129.model2.Award;
 import kz.example.G129.repository.FilmRepository;
+import kz.example.G129.repository2.AwardRepository;
 import kz.example.G129.service.ActorService;
 import kz.example.G129.service.DirectorService;
 import kz.example.G129.service.FilmService;
@@ -18,6 +20,16 @@ public class HomeController {
     private final  FilmService filmService;
     private final DirectorService directorService;
     private final ActorService actorService;
+    private final AwardRepository awardRepository;
+
+
+    @PostMapping(value = "/add-award")
+    public String addAward(Award award){
+        awardRepository.save(award);
+        return "redirect:/";
+    }
+
+
     @GetMapping(value = "/") //@WebServlet(value="/")
     public String homePage(Model model) {
         model.addAttribute("filmy", filmService.getAllFilms()); // request.setAttribute("films",  DBManager.getFilms());

@@ -3,6 +3,7 @@ package kz.example.G129.service.impl;
 import kz.example.G129.model.Film;
 import kz.example.G129.repository.FilmRepository;
 import kz.example.G129.service.FilmService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,9 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
-
-    @Autowired
-    private FilmRepository filmRepository;
+    private final FilmRepository filmRepository;
 
     public List<Film> getAllFilms() {
         return filmRepository.findAll();

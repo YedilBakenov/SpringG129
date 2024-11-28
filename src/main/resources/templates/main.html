@@ -4,6 +4,13 @@
       layout:decorate="layout.html">
 <body>
 <div layout:fragment="content">
+
+    <form th:action="@{'/add-award'}" method="post">
+        <input type="text" class="form-control" name="name">
+        <input type="number" class="form-control" name="year">
+        <button class="btn btn-success btn-sm">ADD AWARD</button>
+    </form>
+
     <table class="table table-striped text-secondary">
         <thead>
         <tr>
