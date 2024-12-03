@@ -17,4 +17,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer>{
             "WHERE f.name ILIKE concat('%', :s, '%')" +
             "OR f.genre ILIKE concat('%', :s, '%')")
     List<Film>getFilmsByWord(String s);
+
+    Film findByName(String name);
 }
