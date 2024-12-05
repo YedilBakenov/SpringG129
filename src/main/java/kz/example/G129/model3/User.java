@@ -14,11 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
     @Id
-    private ObjectId id;
+    private String id;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "SURNAME")
     private String surname;
 }

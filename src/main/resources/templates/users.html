@@ -6,7 +6,7 @@
     <div th:insert="links.html"></div>
 </head>
 <body>
-    <form th:action="@{'/add-user'}" th:object="${user}" method="post">
+    <form th:action="@{'/users/add-user'}" method="post">
         <input type="text" class="form-control" name=name>
         <input type="text" class="form-control" name="surname">
         <button class="btn btn-success btn-sm">ADD USER</button>
