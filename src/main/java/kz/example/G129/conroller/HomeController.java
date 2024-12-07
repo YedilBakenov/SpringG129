@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final  FilmService filmService;
+    private final FilmService filmService;
     private final DirectorService directorService;
     private final ActorService actorService;
     private final AwardRepository awardRepository;
